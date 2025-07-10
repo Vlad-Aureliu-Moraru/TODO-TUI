@@ -1,0 +1,68 @@
+Screen{
+    layout:vertical;
+    background:grey;
+    padding:1;
+}
+
+.main-cont{
+background:red;
+layout:horizontal;
+align:right middle;
+}
+
+Activecont{
+background:blue;
+width:40%;
+height:100%;
+}
+
+CustomHeader{
+    background:yellow;
+    width:100%;
+    height:auto;
+
+}
+CustomHeader Button{
+background:red;
+width:20%;
+
+}
+
+TaskListCont{
+    height:100%;
+    width:60%;
+    border:heavy $accent;
+    background:$surface;
+}
+
+.title{
+    width:100%;
+    text-align:center;
+    margin-bottom:1;
+    border-bottom:double $secondary;
+    padding-bottom:0;
+    height:auto;
+    background:$primary;
+    color:white;
+    padding:0 1;
+}
+Task{
+    border:solid $primary;
+    border-title-align:center;
+    padding:0 2;
+    margin-bottom:1;
+    background: $panel-lighten-1;
+    height:auto;
+    min-height:5;
+    layout:vertical;
+}
+.task-detail{
+    width:100%;
+    padding-bottom:0;
+    padding-top:0;
+    margin-left:1;
+}
+.action-btn{
+    width:auto;
+    margin:1 0;
+}
