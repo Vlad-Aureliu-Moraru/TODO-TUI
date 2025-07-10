@@ -1,7 +1,6 @@
 Screen{
     layout:vertical;
     background:grey;
-    padding:1;
 }
 
 .main-cont{
@@ -20,11 +19,18 @@ CustomHeader{
     background:yellow;
     width:100%;
     height:auto;
+    padding-left:1;
+    border:heavy $accent;
+    background:$surface;
+    align:center middle;
+    layout:vertical;
+
 
 }
-CustomHeader Button{
-background:red;
-width:20%;
+    CustomHeader Button{
+    background:blue;
+    width:3;
+    height:3;
 
 }
 
@@ -34,7 +40,10 @@ TaskListCont{
     border:heavy $accent;
     background:$surface;
 }
-
+.complete_btn{
+    width:1;
+    height:1;
+}
 .title{
     width:100%;
     text-align:center;
