@@ -1,6 +1,10 @@
+$maincolor: hsl(15, 18%, 10%);
+$bordercolor:hsl(126, 58%, 39%);
+
+
 Screen{
     layout:vertical;
-    background:grey;
+    background:$maincolor;
 }
 
 .main-cont{
@@ -9,36 +13,23 @@ layout:horizontal;
 align:right middle;
 }
 
+#task_list_view{
+background:red;
+}
+
 Activecont{
-background:blue;
+background:$maincolor;
+border:heavy $bordercolor;
 width:40%;
 height:100%;
 }
 
-CustomHeader{
-    background:yellow;
-    width:100%;
-    height:auto;
-    padding-left:1;
-    border:heavy $accent;
-    background:$surface;
-    align:center middle;
-    layout:vertical;
-
-
-}
-    CustomHeader Button{
-    background:blue;
-    width:3;
-    height:3;
-
-}
 
 TaskListCont{
     height:100%;
     width:60%;
-    border:heavy $accent;
-    background:$surface;
+    border:heavy $bordercolor;
+    background:$maincolor;
 }
 .complete_btn{
     width:1;

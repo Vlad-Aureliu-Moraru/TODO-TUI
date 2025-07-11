@@ -1,92 +1,68 @@
+# main.py
 from textual.app import App, ComposeResult
-from textual.widgets import  Label, Button ,Static
+from textual.widgets import Label, Button, Static
 from textual.containers import Container
-from textual.screen import Screen
-from datetime import datetime
+from textual.screen import Screen # Screen is generally used for pushing/popping different views
 
-class Task(Static):
-    def __init__(self,task_id:str,name:str,task_time:str,completed:bool,repeatable:bool,deadline:datetime = None,*args,**kwargs):
-            super().__init__(*args,**kwargs)
-            self.task_name = name
-            self.task_time = task_time
-            self.repeatable= repeatable
-            self.deadline= deadline
-            self.completed = completed
-            self.task_id = task_id 
+from ui import MainScreen  # Assuming ui.py defines a MainScreen
+import logic as lo
 
-    def compose(self)-> ComposeResult:
-        deadline_str = f"[bold purple]Deadline:{self.deadline.strftime('%Y-%m-%d %H:%M')}[/]" if self.deadline else "[bold light blue]No Deadline[/]"
-        repeat_str = "[bold dim yellow]Repeatable[/]" if self.repeatable else "[bold orange]Not Repeatable[/]"
-        complete_str = "[bold green]Completed[/]" if self.completed else "[bold red]Not Completed[/]"
-        yield Label (f"----{self.task_id}----",classes="task-detail")
-        yield Label(f"[b]Task :[/b]{self.task_name}",classes="task-detail")
-        yield Label(f"[b]Time :[/b]{self.task_time}",classes="task-detail")
-        yield Label(f"[b]Status :[/b]{complete_str}",classes="task-detail")
-        yield Label(f"{repeat_str}",classes="task-detail")
-        yield Label(f"{deadline_str}",classes="task-detail")
-        
+# Your `update_task_list` logic should ideally be a method within your App
+# or passed to the screen that needs to update its widgets.
+# Let's integrate it into the App's on_mount.
 
-class CustomTimer(Static):
-    def on_mount(self) -> None:
-        """Called when the widget is added to the DOM."""
-        self.set_interval(5, self.update_time)
-        self.update_time()
-
-    def update_time(self) -> None:
-        """Method to get the current time and update the Label."""
-        current_datetime = datetime.now()
-        formatted_time = current_datetime.strftime("%H:%M:%S")
-        self.query_one("#current-time-label", Label).update(formatted_time)
-
-    def compose(self) -> ComposeResult:
-        yield Label("", id="current-time-label")
-
-class Activecont(Static):
-    def compose(self)->ComposeResult:
-        yield CustomTimer()
-
-class TaskListCont(Static):
-    def compose(self)->ComposeResult:
-        yield Label("[bold white on $primary]My Tasks[/]",classes = "title")
-        yield Task(
-            task_id ="1",
-            name="Learn",
-            task_time="2 hours",
-            completed= False,
-            repeatable= False,
-            deadline=datetime(2025,7,15,10,0)
-
-        )
-
-
-
-class MainScreen(Screen):
-    def compose(self) -> ComposeResult:
-        with Container(classes = "main-cont"):
-            yield Activecont() 
-            yield TaskListCont() 
-        
-
-
-# Define the main application class
 class MyApp(App):
+    # Set the initial CSS path
+    CSS_PATH = "main.tcss"
 
+    # Define application-wide key bindings
     BINDINGS = [
         ("d", "toggle_dark", "Toggle dark mode"),
         ("q", "quit_app", "Quit"),
+        ("a", "add_task_prompt", "Add Task"), # New binding for adding tasks
     ]
-    CSS_PATH = "main.tcss"
+
+    def compose(self) -> ComposeResult:
+        """Create child widgets for the app."""
+        # MainScreen should be the primary content of your app
+        yield MainScreen()
+
     def on_mount(self) -> None:
         """Called when app is mounted."""
-        self.push_screen(MainScreen()) # Push our main screen onto the app's stack
+        # Get the instance of your MainScreen to update its contents
+        main_screen_instance = self.query_one(MainScreen)
+
+        # Load tasks using your logic module's public API
+        tasks_data = lo.get_tasks(include_completed=False) # Get uncompleted tasks by default
+       # main_screen_instance.update_task_list_ui(tasks_data)
+        self.log(f"Tasks loaded and updated UI: {tasks_data}") # Use self.log for debugging
 
     def action_toggle_dark(self) -> None:
         """An action to toggle dark mode."""
-        self.dark = not self.dark
+        self.dark = not self.dark # Textual's built-in dark mode toggle
+        self.log(f"Dark mode toggled: {self.dark}")
 
     def action_quit_app(self) -> None:
         """An action to quit the application."""
         self.exit("Exiting application.") # Exit gracefully
+
+    def action_add_task_prompt(self) -> None:
+        """Action to prompt the user for a new task and add it."""
+        self.app.bell() # Play a sound to indicate interaction
+        new_task_description = self.app.prompt("Enter new task description:")
+
+        if new_task_description:
+            # Use your logic module to add the task
+            task_id = lo.add_task(task_name=new_task_description)
+            self.notify(f"Task '{new_task_description}' added! ID: {task_id}")
+
+            # After adding, refresh the task list in the UI
+            main_screen_instance = self.query_one(MainScreen)
+            tasks_data = lo.get_tasks(include_completed=False)
+#            main_screen_instance.update_task_list_ui(tasks_data)
+        else:
+            self.notify("Task addition cancelled.", severity="warning")
+
 
 if __name__ == "__main__":
     app = MyApp()
