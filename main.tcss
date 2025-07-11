@@ -4,17 +4,13 @@ $bordercolor:hsl(126, 58%, 39%);
 
 Screen{
     layout:vertical;
-    background:$maincolor;
+    background:grey;
 }
 
 .main-cont{
 background:red;
 layout:horizontal;
 align:right middle;
-}
-
-#task_list_view{
-background:red;
 }
 
 Activecont{
@@ -31,10 +27,7 @@ TaskListCont{
     border:heavy $bordercolor;
     background:$maincolor;
 }
-.complete_btn{
-    width:1;
-    height:1;
-}
+
 .title{
     width:100%;
     text-align:center;

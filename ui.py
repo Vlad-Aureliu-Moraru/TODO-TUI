@@ -49,38 +49,23 @@ class TaskListCont(Static):
     def compose(self)->ComposeResult:
         yield Label("[bold white on $primary]My Tasks[/]",classes = "title")
         yield ListView(id="task_list_view")
-        yield Task(
-            task_id ="1",
-            name="Learn",
-            task_time="2 hours",
-            completed= False,
-            repeatable= False,
-            deadline=datetime(2025,7,15,10,0)
-
-            )
-
 
 class MainScreen(Screen):
     def compose(self) -> ComposeResult:
         with Container(classes = "main-cont"):
-            #yield Activecont() 
-            #yield TaskListCont() 
-            yield Label("[bold red]HELLO TEXTUAL![/bold red]", id="test-label") # <-- ADD THIS
+            yield Activecont() 
+            yield TaskListCont() 
 
-    #def update_task_list_ui(self, tasks: list[dict]) -> None:
-    #        """
-    #        Updates the ListView with the provided tasks.
-    #        Expects tasks as a list of dictionaries, e.g., from logic.get_tasks().
-    #        """
-    #        list_view = self.query_one("#task_list_view",ListView)
-    #        list_view.clear() # Clear existing items
-    #        for task in tasks:
-    #            list_view.append(Task(
-    #                task_id=task['task_id'],
-    #                name=task['task_name'],
-    #                task_time=task['task_time'],
-    #                completed=task['completed'],
-    #                repeatable=task['repeatable'] 
-    #            ))
-    #        self.app.notify(f"Task list updated with {len(tasks)} items.") # Provide user feedback
+    def update_task_list_ui(self, tasks: list[dict]) -> None:
+            list_view = self.query_one("#task_list_view",ListView)
+            list_view.clear() 
+            for task in tasks:
+                list_view.append(Task(
+                    task_id=task['task_id'],
+                    name=task['task_name'],
+                    task_time=task['task_time'],
+                    completed=task['completed'],
+                    repeatable=task['repeatable'] 
+                ))
+            self.app.notify(f"Task list updated with {len(tasks)} items.") # Provide user feedback
 

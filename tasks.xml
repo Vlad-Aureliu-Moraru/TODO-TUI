@@ -1,2 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<tasks><task task_id="a1b2c3d4-e5f6-7890-1234-567890abcdef" task_name="Write Textualize App README" task_time="45" deadline="2025-07-15" completed="false" repeatable="false" /><task task_id="df40d65a-6bbe-4ba8-9f41-72bcf0dce53d" task_name="Plan next project" task_time="45" deadline="2025-07-20" completed="false" repeatable="true" /><task task_id="76ec6e41-54b5-4ff1-9ad8-d6ffccfbeeb6" task_name="Buy groceries" task_time="25" deadline="" completed="false" repeatable="false" /><task task_id="c9ba127e-5429-4666-a04c-f6caf5931c6e" task_name="Plan next project" task_time="45" deadline="2025-07-20" completed="false" repeatable="true" /><task task_id="77601d94-183d-4bf2-b44d-aa5f4f3b8403" task_name="Buy groceries" task_time="25" deadline="" completed="false" repeatable="false" /></tasks>
+<tasks>
+<task task_id="a1b2c3d4-e5f6-7890-1234-567890abcdef" task_name="Write Textualize App README" task_time="45" deadline="2025-07-15" completed="false" repeatable="false" />
+<task task_id="df40d65a-6bbe-4ba8-9f41-72bcf0dce53d" task_name="Plan next project" task_time="45" deadline="2025-07-20" completed="false" repeatable="true" />
+<task task_id="76ec6e41-54b5-4ff1-9ad8-d6ffccfbeeb6" task_name="Buy groceries" task_time="25" deadline="" completed="false" repeatable="false" />
+<task task_id="c9ba127e-5429-4666-a04c-f6caf5931c6e" task_name="Plan next project" task_time="45" deadline="2025-07-20" completed="false" repeatable="true" />
+<task task_id="77601d94-183d-4bf2-b44d-aa5f4f3b8403" task_name="Buy groceries" task_time="25" deadline="" completed="false" repeatable="false" />
+</tasks>
