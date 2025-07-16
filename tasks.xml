@@ -1,7 +1,4 @@
 <?xml version='1.0' encoding='utf-8'?>
 <tasks>
  <task task_name="test" task_id="68456256-91ac-4158-bd10-cf57b1af6bf9" task_repeatable="false" task_completed="false" task_time="20" task_deadline="" />
- <task task_name="test" task_id="2bcc2315-8307-4674-aa8c-3cf2c261aa91" task_repeatable="false" task_completed="false" task_time="20" task_deadline="" />
- <task task_name="test" task_id="ed87abef-0aef-43e2-9959-b49b3cbab269" task_repeatable="false" task_completed="false" task_time="20" task_deadline="" />
- <task task_name="test" task_id="505cf02a-be16-47b2-9f7c-07382a79ae29" task_repeatable="false" task_completed="false" task_time="20" task_deadline="" />
 </tasks>

@@ -17,10 +17,32 @@ class Task_model:
 
 
 def get_tasks_from_xml():
+    task_list = []
     tree =  ET.parse("tasks.xml")
     root = tree.getroot()
-    print(root)
-    print(root[0].attrib)
+    for task_element in root.findall('task'):
+
+        task_name = task_element.get('task_name')
+        task_id = task_element.get('task_id')
+        task_repeatable = task_element.get('task_repeatable')
+        task_completed =task_element.get('task_completed')
+        task_time = task_element.get('task_time')
+        task_deadline = task_element.get("task_deadline")
+
+        task_time = int(task_time) if task_time is not None else 0
+        task_completed = task_completed=='true' if task_completed is not None else False
+        task_completed = task_completed=='true' if task_completed is not None else False
+        
+        task_list.append({
+            "task_id":task_id,
+            "task_name":task_name,
+            "task_repeatable":task_repeatable,
+            "task_deadline":task_deadline,
+            "task_completed":task_completed,
+            "task_time":task_time,
+            })
+    return task_list
+        
 
 
 
@@ -63,4 +85,7 @@ if __name__ == "__main__":
     my_first_task = Task_model(task_deadline=None,task_id=str(uuid.uuid4()),task_name="test",task_repeatable=False,task_time=20)
 #    print(my_first_task)
 #   write_task_into_xml(my_first_task)
-    get_tasks_from_xml()
+    tasks = get_tasks_from_xml()
+    for i in tasks:
+        print(i)
+        print("--------------")
